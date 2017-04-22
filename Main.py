@@ -31,7 +31,7 @@ def get_weak_words():
     try:
         response = requests.request("GET", url,  params=querystring)
 
-        assert response.status_code ==200, "Toto won't let you in"
+        assert response.status_code == 200, "Toto won't let you in"
 
         vocabulary = json.loads(response.content)["vocabulary"]
 
@@ -68,12 +68,12 @@ def create_new_learning_session(weak_words):
 
 def upload_non_learning_session():
 
-    subprocess.Popen(['ino', 'upload'], cwd="IOT_Kettle/IOT_Kettle_Template")
+    subprocess.Popen(['ino', 'upload'], cwd="IOT_Kettle_Template")
 
 
 def upload_learning_session():
 
-    subprocess.Popen(['ino', 'upload'], cwd="IOT_Kettle/IOT_Kettle")
+    subprocess.Popen(['ino', 'upload'], cwd="IOT_Kettle")
 
 
 def main(argv):
