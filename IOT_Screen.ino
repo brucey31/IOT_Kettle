@@ -1,5 +1,5 @@
-#include "/Users/Bruce/Desktop/MaxMatrix.h"
-#include "/Users/Bruce/Desktop/MaxMatrix.cpp"
+#include "/home/pi/Documents/IOT_Kettle/IOT_Kettle/lib/MaxMatrix.h"
+#include "/home/pi/Documents/IOT_Kettle/IOT_Kettle/lib/MaxMatrix.cpp"
 
 
 PROGMEM const unsigned char CH[] = {

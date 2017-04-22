@@ -48,9 +48,9 @@ def get_weak_words():
 
         return random.choice(weak_words)
 
-
     except Exception as e:
         print e
+        return ["Hello", "Bonjour"]
 
 
 def create_new_learning_session(weak_words):
@@ -60,7 +60,7 @@ def create_new_learning_session(weak_words):
     with open('IOT_Screen.ino', 'r') as ino_file_read:
         with open('IOT_Kettle/src/IOT_Screen.ino', 'w') as ino_file_write:
             template_file = ino_file_read.read()
-            template_file = str(template_file).replace('"paramtobereplaced";', weak_words_string)
+            template_file = str(template_file).replace('paramtobereplaced', weak_words_string)
 
             ino_file_write.write(template_file)
     return True
