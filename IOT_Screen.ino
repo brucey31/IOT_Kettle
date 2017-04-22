@@ -121,9 +121,9 @@ void setup(){
 void loop(){
   
   byte c;
-  delay(500);
+  delay(100);
   m.shiftLeft(false, true);
-  printStringWithShift(string1, 150);  // Send scrolling Text
+  printStringWithShift(string1, 100);  // Send scrolling Text
 
 }
 

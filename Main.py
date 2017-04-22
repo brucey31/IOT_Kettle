@@ -2,7 +2,7 @@ import requests
 import sys
 import json
 import configparser
-import psycopg2
+#import psycopg2
 import random
 import subprocess
 import os
@@ -22,13 +22,11 @@ def get_weak_words():
     querystring = {"uid": "32767377", "ck": "1487691895548",
 
                    "access-token": "09080ba2c38ae0b51fb79bc35a8720ba55daddb054d11f00d3bd53c5d6f3def0|c457a87a59304e7c1c1330c18082696b.3332373637333737"}
-
-    # Connect to RedShift
-    conn_string = "dbname=%s port=%s user=%s password=%s host=%s" % (RED_USER, RED_PORT, RED_USER, RED_PASSWORD, RED_HOST)
-    conn = psycopg2.connect(conn_string)
-    cursor = conn.cursor()
-
     try:
+        # Connect to RedShift
+        conn_string = "dbname=%s port=%s user=%s password=%s host=%s" % (RED_USER, RED_PORT, RED_USER, RED_PASSWORD, RED_HOST)
+        conn = psycopg2.connect(conn_string)
+        cursor = conn.cursor()
         response = requests.request("GET", url,  params=querystring)
 
         assert response.status_code == 200, "Toto won't let you in"
@@ -50,7 +48,7 @@ def get_weak_words():
 
     except Exception as e:
         print e
-        return ["Hello", "Bonjour"]
+        return ["My Name is", "Je m'appelle"]
 
 
 def create_new_learning_session(weak_words):
@@ -68,18 +66,21 @@ def create_new_learning_session(weak_words):
 
 def upload_non_learning_session():
 
-    subprocess.Popen(['ino', 'upload'], cwd="IOT_Kettle_Template")
-
+    subprocess.call(['ino', 'build'], cwd="IOT_Kettle_Template")
+    subprocess.call(['ino', 'upload'], cwd="IOT_Kettle_Template")
 
 def upload_learning_session():
 
-    subprocess.Popen(['ino', 'upload'], cwd="IOT_Kettle")
+    subprocess.call(['ino', 'build'], cwd="IOT_Kettle")
+    subprocess.call(['ino', 'upload'], cwd="IOT_Kettle")
 
 
 def main(argv):
 
     weak_words = get_weak_words()
+    print weak_words
     result = create_new_learning_session(weak_words)
+    upload_learning_session()
 
     print result
 
